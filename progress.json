@@ -28,7 +28,7 @@
       {"topic": "Producer Side", "covers": "PutRecord · PutRecords · Single vs batch writes · Producer retries · Producer failures", "status": "done"},
       {"topic": "Consumer Side", "covers": "GetRecords · Shard iterator · Polling · Checkpointing · Consumer lag", "status": "in-progress", "open": "consumer-side reading and consumer lag understood; GetRecords, shard iterator, polling and checkpointing still to do"},
       {"topic": "Consumer Types", "covers": "Standard consumers vs enhanced fan-out consumers", "status": "done"},
-      {"topic": "Kinesis + Lambda", "covers": "Lambda event source mapping · Polling · Batch size · Retry · Failure handling · Partial batch failure", "status": "in-progress", "open": "test change"},
+      {"topic": "Kinesis + Lambda", "covers": "Lambda event source mapping · Polling · Batch size · Retry · Failure handling · Partial batch failure", "status": "pending"},
       {"topic": "Retention and Replay", "covers": "Why Kinesis stores records temporarily · Retention period · Replay · Recovering after consumer failure", "status": "done"},
       {"topic": "Scaling Modes", "covers": "Provisioned mode · On-demand mode · When to use each", "status": "done"},
       {"topic": "Resharding", "covers": "Split shard · Merge shard · Scaling up · Scaling down", "status": "done"},
