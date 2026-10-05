@@ -2,11 +2,105 @@
 
 > AWS Certified Big Data - Specialty · Chapter 1: Collection · Topic 1 · The roadmap for mastering Kinesis Data Streams, one concept at a time.
 
-🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
+🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜
 
-**1 of 20 topics complete · 5%**
+🟩 complete · 🟨 in progress · ⬜ pending
 
-## Current progress
+**7 concepts understood · 1 of 20 roadmap topics complete · 1 in progress · 5%**
+
+## Concepts understood so far
+
+Each concept below is marked complete once it is clearly understood. They feed the roadmap topics further down.
+
+### ✅ 1. Basic flow
+
+```text
+Producer -- PUT --> Kinesis <-- GET -- Consumer
+```
+
+- `PUT` = the Producer writes / sends data into Kinesis
+- `GET` = the Consumer reads data from Kinesis
+- Kinesis sits in the middle
+- The Consumer initiates the read
+
+### ✅ 2. Kinesis vs direct database write
+
+```text
+Application --> MongoDB
+```
+
+This is completely possible. Kinesis is not mandatory just because data arrives continuously.
+
+### ✅ 3. Transaction database vs event stream
+
+```text
+MongoDB = operational / current state
+Kinesis = event flow
+```
+
+Example:
+
+```text
+MongoDB:  current playback position = 32:15
+
+Kinesis:  PLAY
+          PAUSE
+          SEEK
+          BUFFER_START
+          BUFFER_END
+```
+
+### ✅ 4. Why not just use MongoDB?
+
+MongoDB can:
+
+- handle multiple readers
+- serve multiple systems
+- scale
+- store event data
+- support querying
+
+Kinesis becomes more attractive when:
+
+- event volume becomes very large
+- we want to reduce read/write pressure on the transactional database
+- we want a dedicated streaming layer
+- multiple systems need to process events continuously
+
+### ✅ 5. Independent processing
+
+Different readers can process the same stream at different speeds, and each moves on its own.
+
+```text
+Reader A -> event 1000
+Reader B -> event 850
+Reader C -> event 700
+```
+
+### ✅ 6. Retention
+
+Retention = how long Kinesis keeps the events available.
+
+```text
+after retention expires:  event -> no longer available in Kinesis
+```
+
+### ✅ 7. Replay
+
+Replay = reading retained events again. The movie analogy:
+
+```text
+Already watched to 15 min.
+
+Continue:  15 min -> onward
+Replay:     0 min -> onward again
+```
+
+- Replay is not a separate ON/OFF setting
+- Replay depends on the retained data still being available
+- Reading does not delete the event
+
+## Roadmap progress
 
 - [x] 1. Basic Flow
 - [ ] 2. Core Terminology
@@ -18,7 +112,7 @@
 - [ ] 8. Consumer Side
 - [ ] 9. Consumer Types
 - [ ] 10. Kinesis + Lambda
-- [ ] 11. Retention and Replay
+- [ ] 11. Retention and Replay (in progress: retention and replay understood; the retention period setting and recovering after a consumer failure are still to do)
 - [ ] 12. Scaling Modes
 - [ ] 13. Resharding
 - [ ] 14. Throughput and Limits
@@ -43,7 +137,7 @@
 | 8 | **Consumer Side** | GetRecords · Shard iterator · Polling · Checkpointing · Consumer lag | ⏳ Pending |
 | 9 | **Consumer Types** | Standard consumers vs enhanced fan-out consumers | ⏳ Pending |
 | 10 | **Kinesis + Lambda** | Lambda event source mapping · Polling · Batch size · Retry · Failure handling · Partial batch failure | ⏳ Pending |
-| 11 | **Retention and Replay** | Why Kinesis stores records temporarily · Retention period · Replay · Recovering after consumer failure | ⏳ Pending |
+| 11 | **Retention and Replay** | Why Kinesis stores records temporarily · Retention period · Replay · Recovering after consumer failure | 🔨 In progress |
 | 12 | **Scaling Modes** | Provisioned mode · On-demand mode · When to use each | ⏳ Pending |
 | 13 | **Resharding** | Split shard · Merge shard · Scaling up · Scaling down | ⏳ Pending |
 | 14 | **Throughput and Limits** | Write throughput · Read throughput · Records per second · MB/s · What happens when limits are exceeded | ⏳ Pending |
@@ -53,20 +147,6 @@
 | 18 | **Architecture Patterns** | Application events · Clickstream · Logs · Fraud detection · IoT · Real-time analytics · Security monitoring | ⏳ Pending |
 | 19 | **Service Comparisons** | Kinesis Data Streams vs Firehose · Kinesis vs SQS · Kinesis vs SNS · Kinesis vs Kafka / MSK | ⏳ Pending |
 | 20 | **Hands-on Build** | Python producer and consumer on a Kinesis data stream, then extended with Lambda, an analytics consumer and an S3 path | ⏳ Pending |
-
-## Completed so far
-
-**1. Basic Flow** is written up in the [Kinesis Data Streams README](README.md):
-
-```text
-Producer -- PUT --> Kinesis <-- GET -- Consumer
-```
-
-- `PUT` is the Producer **writing** data into Kinesis
-- `GET` is the Consumer **reading** data from Kinesis
-- The Producer starts the PUT, and the Consumer starts the GET
-- Kinesis sits in the middle and keeps events until Consumers process them
-- Normally Kinesis does not push events to the Consumer; the Consumer asks for them
 
 ## Hands-on build target (topic 20)
 
@@ -103,4 +183,4 @@ Kinesis
 
 - One concept at a time. A topic is marked complete only when its section is written and understood.
 - Core Terminology (topic 2) goes in this order: Producer → Record → Stream → Shard → Partition Key → Sequence Number → Consumer.
-- Each topic is added to the [Kinesis Data Streams README](README.md) with a small animated diagram, then ticked off here.
+- The [Kinesis Data Streams README](README.md) holds the written explanations with animated diagrams. Concepts 2 to 7 above are understood but not yet written up there.
