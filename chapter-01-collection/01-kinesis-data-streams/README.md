@@ -1,6 +1,6 @@
 # Amazon Kinesis Data Streams
 
-> Chapter 1 · Collection · Topic 1 of 7
+> Chapter 1 · Collection · Topic 1 of 7 · [See the learning tracker](TRACKER.md)
 
 **In this part you will learn:**
 
@@ -78,7 +78,7 @@ Consumer
 
 The important point: **the Consumer starts the GET request.**
 
-Kinesis does not push the events to the Consumer on its own. The Consumer asks, and Kinesis answers with the events. That is why the arrow points from the Consumer **to** Kinesis. The arrows show the direction of the **request**:
+Normally, Kinesis does not push the events to the Consumer on its own. The Consumer asks, and Kinesis answers with the events. That is why the arrow points from the Consumer **to** Kinesis. The arrows show the direction of the **request**:
 
 ```text
 Producer -- PUT --> Kinesis <-- GET -- Consumer
