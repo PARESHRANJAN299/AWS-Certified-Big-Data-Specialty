@@ -1,0 +1,71 @@
+{
+  "chapters": [
+    {"name": "Collection", "status": "in-progress"},
+    {"name": "Storage", "status": "planned"},
+    {"name": "Processing", "status": "planned"},
+    {"name": "Analysis", "status": "planned"},
+    {"name": "Visualization", "status": "planned"},
+    {"name": "Security", "status": "planned"}
+  ],
+  "chapter1_topics": [
+    {"name": "Amazon Kinesis Data Streams", "folder": "chapter-01-collection/01-kinesis-data-streams", "status": "auto"},
+    {"name": "Kinesis Data Firehose", "status": "planned"},
+    {"name": "Kinesis Agent", "status": "planned"},
+    {"name": "AWS IoT Core", "status": "planned"},
+    {"name": "IoT Rules Engine", "status": "planned"},
+    {"name": "Sensor data", "status": "planned"},
+    {"name": "Amazon SQS", "status": "planned"}
+  ],
+  "kinesis": {
+    "next": "Hot shard and bad partition keys",
+    "roadmap": [
+      {"topic": "Basic Flow", "covers": "What PUT means · What GET means · Who initiates PUT · Who initiates GET · Kinesis sits in the middle · Kinesis does not normally push directly to the consumer", "status": "done"},
+      {"topic": "Core Terminology", "covers": "Producer · Record · Stream · Shard · Partition Key · Sequence Number · Consumer", "status": "done"},
+      {"topic": "Record Structure", "covers": "What one Kinesis record contains: Data · Partition key · Sequence number · Approximate arrival timestamp", "status": "in-progress", "open": "record, partition key and sequence number understood; approximate arrival timestamp still to do"},
+      {"topic": "Partitioning", "covers": "How partition keys work · How Kinesis chooses a shard · Why the same partition key matters · Good vs bad partition keys · Hot partition / hot shard", "status": "in-progress", "open": "how partition keys work and why the same key matters understood; good vs bad keys and hot shards still to do"},
+      {"topic": "Shards", "covers": "What a shard is · Why shards exist · Read capacity · Write capacity · Parallelism · Scaling shards", "status": "in-progress", "open": "shard, capacity and parallelism understood; scaling shards is now covered by Resharding (topic 13), so this one can probably be ticked complete"},
+      {"topic": "Ordering", "covers": "Ordering inside one shard · Why ordering is not global · How the partition key affects ordering", "status": "done"},
+      {"topic": "Producer Side", "covers": "PutRecord · PutRecords · Single vs batch writes · Producer retries · Producer failures", "status": "done"},
+      {"topic": "Consumer Side", "covers": "GetRecords · Shard iterator · Polling · Checkpointing · Consumer lag", "status": "in-progress", "open": "consumer-side reading and consumer lag understood; GetRecords, shard iterator, polling and checkpointing still to do"},
+      {"topic": "Consumer Types", "covers": "Standard consumers vs enhanced fan-out consumers", "status": "done"},
+      {"topic": "Kinesis + Lambda", "covers": "Lambda event source mapping · Polling · Batch size · Retry · Failure handling · Partial batch failure", "status": "pending"},
+      {"topic": "Retention and Replay", "covers": "Why Kinesis stores records temporarily · Retention period · Replay · Recovering after consumer failure", "status": "done"},
+      {"topic": "Scaling Modes", "covers": "Provisioned mode · On-demand mode · When to use each", "status": "done"},
+      {"topic": "Resharding", "covers": "Split shard · Merge shard · Scaling up · Scaling down", "status": "done"},
+      {"topic": "Throughput and Limits", "covers": "Write throughput · Read throughput · Records per second · MB/s · What happens when limits are exceeded", "status": "done"},
+      {"topic": "Error Handling", "covers": "ProvisionedThroughputExceededException · Retry · Backoff · Duplicate processing · Idempotency", "status": "pending"},
+      {"topic": "Monitoring", "covers": "CloudWatch metrics: IncomingRecords · IncomingBytes · GetRecords.IteratorAgeMilliseconds · ReadProvisionedThroughputExceeded · WriteProvisionedThroughputExceeded", "status": "pending"},
+      {"topic": "Security", "covers": "IAM permissions · Encryption · KMS · VPC endpoints · Least privilege", "status": "pending"},
+      {"topic": "Architecture Patterns", "covers": "Application events · Clickstream · Logs · Fraud detection · IoT · Real-time analytics · Security monitoring", "status": "pending"},
+      {"topic": "Service Comparisons", "covers": "Kinesis Data Streams vs Firehose · Kinesis vs SQS · Kinesis vs SNS · Kinesis vs Kafka / MSK", "status": "pending"},
+      {"topic": "Hands-on Build", "covers": "Python producer and consumer on a Kinesis data stream, then extended with Lambda, an analytics consumer and an S3 path", "status": "pending"}
+    ],
+    "concepts": [
+      {"name": "Why Kinesis exists", "line": "Not mandatory; databases like MongoDB can ingest directly; Kinesis helps with large continuous event flow, less database pressure, replay and independent processing", "anchor": "#4-do-you-always-need-kinesis"},
+      {"name": "PUT and GET", "line": "Producer -- PUT --> Kinesis <-- GET -- Consumer", "anchor": "#2-basic-kinesis-flow"},
+      {"name": "Producer", "line": "Application or service that sends records to Kinesis", "anchor": "#51-producer"},
+      {"name": "Record", "line": "One individual event / data item", "anchor": "#52-record"},
+      {"name": "Stream", "line": "The Kinesis resource that receives and holds records temporarily", "anchor": "#53-stream"},
+      {"name": "Shard", "line": "One parallel lane inside a stream", "anchor": "#54-shard"},
+      {"name": "Partition key", "line": "Routing value: you choose the key, Kinesis chooses the shard", "anchor": "#55-partition-key"},
+      {"name": "Sequence number", "line": "Assigned by Kinesis inside a shard; position / order within that shard", "anchor": "#56-sequence-number"},
+      {"name": "Ordering", "line": "Preserved within a shard, not globally across shards", "anchor": "#6-ordering"},
+      {"name": "Provisioned vs on-demand", "line": "Provisioned: you manage shard capacity. On-demand: AWS manages scaling", "anchor": "#71-provisioned-or-on-demand"},
+      {"name": "Shard capacity", "line": "Around 1 MB/s and 1,000 records/s writes; around 2 MB/s reads", "anchor": "#72-shard-capacity"},
+      {"name": "Throttling", "line": "Writes above capacity can be rejected; the producer should retry", "anchor": "#73-throttling"},
+      {"name": "PutRecord", "line": "Sends one record", "anchor": "#8-writing-data-putrecord-and-putrecords"},
+      {"name": "PutRecords", "line": "Sends a batch of records; partial failures are possible", "anchor": "#8-writing-data-putrecord-and-putrecords"},
+      {"name": "Retention", "line": "How long Kinesis keeps records available", "anchor": "#9-retention-and-replay"},
+      {"name": "Replay", "line": "Re-reading retained events from an earlier point", "anchor": "#9-retention-and-replay"},
+      {"name": "Consumer-side reading", "line": "A downstream system reads records from Kinesis", "anchor": "#101-consumer-side-reading"},
+      {"name": "Consumer lag", "line": "How far behind a reader is from the newest events", "anchor": "#102-consumer-lag"},
+      {"name": "Standard consumer", "line": "Readers share the shard's read capacity", "anchor": "#103-standard-consumers-and-enhanced-fan-out"},
+      {"name": "Enhanced fan-out", "line": "Each registered consumer gets dedicated read capacity", "anchor": "#103-standard-consumers-and-enhanced-fan-out"},
+      {"name": "Retention period", "line": "The configurable length of time records are kept", "anchor": null},
+      {"name": "Recovering after a consumer failure", "line": "Resuming reads from retained records after a consumer stops", "anchor": null},
+      {"name": "Provisioned vs on-demand: when to use each", "line": "Choosing a scaling mode", "anchor": null},
+      {"name": "Resharding: split and merge shards", "line": "Changing the number of shards in a stream", "anchor": null},
+      {"name": "Scaling up and scaling down", "line": "Growing and shrinking stream capacity", "anchor": null}
+    ]
+  }
+}
