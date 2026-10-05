@@ -41,6 +41,7 @@ AWS-Certified-Big-Data-Specialty/
 │   └── 01-kinesis-data-streams/
 │       ├── README.md              <- the notes, with animated diagrams and questions
 │       ├── TRACKER.md             <- generated roadmap and progress
+│       ├── KINESIS_PROCESSING_ENGINES.md  <- companion note: Lambda vs Flink vs EMR/Spark vs EC2
 │       └── animations/
 ├── chapter-02-storage/
 ├── chapter-03-processing/
