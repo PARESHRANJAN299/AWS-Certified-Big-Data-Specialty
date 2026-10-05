@@ -1,6 +1,6 @@
 # Kinesis Data Streams: learning tracker
 
-> Chapter 1 · Collection · Topic 1 · The roadmap for mastering Kinesis Data Streams, one concept at a time.
+> AWS Certified Big Data - Specialty · Chapter 1: Collection · Topic 1 · The roadmap for mastering Kinesis Data Streams, one concept at a time.
 
 🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 

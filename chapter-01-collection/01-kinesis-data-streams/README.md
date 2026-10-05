@@ -1,6 +1,6 @@
 # Amazon Kinesis Data Streams
 
-> Chapter 1 · Collection · Topic 1 of 7 · [See the learning tracker](TRACKER.md)
+> AWS Certified Big Data - Specialty · Chapter 1: Collection · Topic 1 of 7 · [See the learning tracker](TRACKER.md)
 
 **In this part you will learn:**
 

@@ -1,11 +1,11 @@
-# AWS Big Data Learning Notebook
+# AWS Certified Big Data - Specialty: Study Notebook
 
-My learning and architecture notes for the AWS Big Data stack, organised chapter by chapter. Each topic is written for beginners, one idea at a time, with small animated diagrams so the flow is easy to see.
+My study and architecture notes for **AWS Certified Big Data - Specialty**, organised chapter by chapter. The six chapters follow the exam's six areas: collection, storage, processing, analysis, visualization and security. Each topic is written for beginners, one idea at a time, with small animated diagrams so the flow is easy to see.
 
 ## How the repository is organised
 
 ```text
-aws-big-data-learning/
+aws-certified-big-data-specialty/
 ├── README.md
 ├── chapter-01-collection/
 │   └── 01-kinesis-data-streams/
