@@ -33,6 +33,8 @@ Examples:
 - Payment
 - Application log
 - IoT sensor event
+- Mobile app activity
+- Game server player action
 
 These events do not arrive once a day in a neat file. They arrive all the time, often many per second.
 
@@ -102,6 +104,11 @@ Producer -- PUT --> Kinesis <-- GET -- Consumer
 | **GET** | Consumer | The Consumer asks Kinesis, and the events come back to the Consumer |
 
 > **Remember:** PUT = Producer writes. GET = Consumer reads.
+
+**One more example.** A video app and an analytics app:
+
+- The video app sends a `PLAY` event into Kinesis. That is a **PUT**.
+- The analytics app reads the `PLAY` event from Kinesis. That is a **GET** (a read).
 
 ---
 
@@ -290,22 +297,32 @@ A **Producer** is an application or service that **sends records to Kinesis**.
 Web application  -- PUT -->  Kinesis
 ```
 
-Examples: a website sending click events, a payment service sending payment events, a sensor gateway sending readings.
+Examples: a backend application, a mobile app backend, a game service, a payment service, a website sending click events, an IoT application.
 
 ### 5.2 Record
 
 A **Record** is **one individual event / data item**.
 
-```text
-{ "event": "login", "user": "user-A" }      <- one record
-{ "event": "click", "user": "user-B" }      <- another record
+Example: one record from a video app.
+
+```json
+{
+  "user": "Paresh",
+  "event": "PLAY",
+  "movie": "Movie123",
+  "position": 120
+}
 ```
+
+That whole object is **one** Kinesis record. The next event, such as a `PAUSE`, is another record.
 
 You send records into Kinesis, Kinesis keeps records, and consumers read records. A record is the unit of data.
 
 ### 5.3 Stream
 
 A **Stream** is the Kinesis resource that **receives and holds records temporarily**. It is the "conveyor belt" from section 1. A stream is made of shards.
+
+Example stream name: `hotstar-user-events`
 
 ### 5.4 Shard
 
@@ -318,7 +335,23 @@ Stream
   |-- Shard 3
 ```
 
-Several lanes mean several records can be handled at the same time. How much each lane can carry is covered in [section 7](#7-capacity-and-scaling).
+```text
+Stream = the whole pipeline
+Shard  = one parallel lane inside that pipeline
+More shards = more throughput capacity
+```
+
+**Why shards exist.** Kinesis needs shards so it can process records **in parallel**. If all records had to go through only one shard, the capacity would be limited. With several shards, Kinesis can handle more traffic.
+
+```text
+Incoming events
+   |
+   |-- Shard 1
+   |-- Shard 2
+   |-- Shard 3
+```
+
+How much each lane can carry is covered in [section 7](#7-capacity-and-scaling).
 
 ### 5.5 Partition key
 
@@ -327,6 +360,17 @@ The **Partition Key** is a **routing value** that decides **which shard gets a r
 - **You choose the key.** For example `user-A`.
 - **Kinesis chooses the shard** from that key.
 - **The same key always goes to the same shard.**
+
+Examples of partition keys: `user_id`, `customer_id`, `device_id`, `session_id`, `order_id`.
+
+Example: the producer sends this record and uses the partition key `Paresh`.
+
+```text
+Record:         { "user": "Paresh", "event": "PLAY" }
+Partition key:  Paresh
+```
+
+Kinesis runs the key through a **hash function** (it turns the key into a number) and uses the result to pick the shard.
 
 <div align="center">
     <img src="animations/partition-key-routing.svg" alt="Animated diagram: records with partition keys user-A, user-B and user-C are routed to three shards; the same key always lands in the same shard and each shard numbers its records" width="100%"/>
@@ -339,11 +383,37 @@ The **Partition Key** is a **routing value** that decides **which shard gets a r
 3. Every `user-A` record lands in **Shard 1**, every `user-B` record in **Shard 2**, every `user-C` record in **Shard 3**.
 4. Inside each shard, the records get numbered in the order they arrive: `#1`, `#2`, `#3`.
 
+#### Why the partition key matters
+
+The partition key matters because:
+
+1. It **decides the shard**.
+2. It **affects ordering** (the same key keeps its order, see [section 6](#6-ordering)).
+3. It **affects load distribution** (how evenly the shards are used).
+4. A **bad partition key can create a hot shard**.
+
+Example of a bad key. If every record uses the same partition key:
+
+```text
+partition key = HOTSTAR      (for every record)
+```
+
+then too many records go to **one shard only**, and the other shards sit idle. That creates imbalance. Good and bad keys, and hot shards, are the next topic.
+
 ### 5.6 Sequence number
 
 A **Sequence Number** is **assigned by Kinesis** to a record **inside a shard**. It shows the record's **position / order within that shard**.
 
 You do not choose it. In the animation above, `#1`, `#2`, `#3` are the order of arrival in each shard.
+
+```text
+Shard 1
+  Record A -> Sequence 1001
+  Record B -> Sequence 1002
+  Record C -> Sequence 1003
+```
+
+These numbers are simplified. Real sequence numbers are much longer, but the idea is the same: a higher number means a later position in that shard.
 
 ### 5.7 Consumer
 
@@ -412,6 +482,14 @@ Kinesis keeps records **in order inside one shard**. It does **not** keep them i
 Ordering is preserved:      within a shard
 Ordering is NOT preserved:  globally, across all shards
 ```
+
+Example: if these records are written to the **same shard**, in this order
+
+```text
+PLAY -> PAUSE -> SEEK -> PLAY
+```
+
+then consumers read them in **that same order**.
 
 **How the partition key helps.** Records with the same key go to the same shard, so **the records for one key stay in order**. If you need all events of one user in order, use the user as the partition key.
 
@@ -730,6 +808,16 @@ Enhanced Fan-Out
 2. The Producer sends records with `PutRecord` or `PutRecords`, each with a **partition key**.
 3. The partition key **routes** each record to a shard (blue, orange and green records go to their own shards). Each shard gives its records **sequence numbers**.
 4. **Consumers** read the records. The **standard** consumer asks with `GET`. The **enhanced fan-out** consumer has dedicated capacity and records are **pushed** to it.
+
+### The flow, step by step
+
+1. The user performs an action.
+2. The application (the Producer) creates a record.
+3. The Producer chooses the partition key.
+4. Kinesis hashes the partition key.
+5. The record goes to a shard.
+6. Kinesis assigns a sequence number.
+7. A consumer reads the record.
 
 ---
 
