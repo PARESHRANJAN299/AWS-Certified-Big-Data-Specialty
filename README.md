@@ -5,7 +5,7 @@ My study and architecture notes for **AWS Certified Big Data - Specialty**, orga
 ## How the repository is organised
 
 ```text
-aws-certified-big-data-specialty/
+AWS-Certified-Big-Data-Specialty/
 ├── README.md
 ├── chapter-01-collection/
 │   └── 01-kinesis-data-streams/
