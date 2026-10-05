@@ -48,7 +48,7 @@ Producer -- PUT --> Kinesis <-- READ -- Processing Engine --> Output
 **Two things that are not processing engines**
 
 - **Kinesis Data Streams** only ingests and retains. It does not process.
-- **Firehose** only **delivers** data (to S3 and other destinations), with light transformation. It is the right answer when you only need to land data, with no real processing.
+- **Firehose** only **delivers** data (to S3 and other destinations), with light transformation. It is the right answer when you only need to land data, with no real processing. The full comparison is in [Data Streams vs Firehose](KINESIS_STREAMS_VS_FIREHOSE.md).
 
 The decision is **not based on the company name**. It is based on the workload:
 

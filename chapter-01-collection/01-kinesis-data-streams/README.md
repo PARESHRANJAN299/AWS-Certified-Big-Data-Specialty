@@ -1,7 +1,7 @@
 # Amazon Kinesis Data Streams
 
 > AWS Certified Big Data - Specialty · Chapter 1: Collection · Topic 1 of 7 · [See the learning tracker](TRACKER.md)  
-> Companion note: [Choosing a processing engine (Lambda, Flink, EMR/Spark, EC2)](KINESIS_PROCESSING_ENGINES.md)
+> Companion notes: [Choosing a processing engine (Lambda, Flink, EMR/Spark, EC2)](KINESIS_PROCESSING_ENGINES.md) · [Data Streams vs Firehose](KINESIS_STREAMS_VS_FIREHOSE.md)
 
 **In this notebook you will learn:**
 
@@ -836,4 +836,4 @@ Enhanced Fan-Out
 | Kinesis vs SQS, Kinesis vs Firehose | Choosing the right service |
 | Real production architecture, hands-on build | Putting it all together |
 
-The next best topic is **hot shard and bad partition keys**, because it builds directly on the shard capacity and partition keys you already know. Progress is tracked in the [learning tracker](TRACKER.md). For choosing what processes the stream, with scenarios and senior interview questions, see the [processing engines note](KINESIS_PROCESSING_ENGINES.md).
+The next best topic is **hot shard and bad partition keys**, because it builds directly on the shard capacity and partition keys you already know. Progress is tracked in the [learning tracker](TRACKER.md). For choosing what processes the stream, with scenarios and senior interview questions, see the [processing engines note](KINESIS_PROCESSING_ENGINES.md). For the difference from Firehose, see [Data Streams vs Firehose](KINESIS_STREAMS_VS_FIREHOSE.md).
