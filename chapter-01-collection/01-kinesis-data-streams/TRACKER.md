@@ -3,11 +3,11 @@
 
 > AWS Certified Big Data - Specialty · Chapter 1: Collection · Topic 1 · The roadmap for mastering Kinesis Data Streams, one concept at a time.
 
-🟩🟩🟨🟨🟨🟩🟩🟨🟩⬜🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜
+🟩🟩🟨🟨🟨🟩🟩🟨🟩🟨🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜
 
 🟩 complete · 🟨 in progress · ⬜ pending
 
-**9 of 20 roadmap topics complete · 4 in progress · 45%**
+**9 of 20 roadmap topics complete · 5 in progress · 45%**
 
 25 concepts understood: 20 written up in the [Kinesis Data Streams README](README.md) and 5 waiting for their write-up.
 
@@ -22,7 +22,7 @@
 - [x] 7. Producer Side
 - [ ] 8. Consumer Side (in progress: consumer-side reading and consumer lag understood; GetRecords, shard iterator, polling and checkpointing still to do)
 - [x] 9. Consumer Types
-- [ ] 10. Kinesis + Lambda
+- [ ] 10. Kinesis + Lambda (in progress: test change)
 - [x] 11. Retention and Replay
 - [x] 12. Scaling Modes
 - [x] 13. Resharding
@@ -47,7 +47,7 @@
 | 7 | **Producer Side** | PutRecord · PutRecords · Single vs batch writes · Producer retries · Producer failures | ✅ Completed |
 | 8 | **Consumer Side** | GetRecords · Shard iterator · Polling · Checkpointing · Consumer lag | 🔨 In progress |
 | 9 | **Consumer Types** | Standard consumers vs enhanced fan-out consumers | ✅ Completed |
-| 10 | **Kinesis + Lambda** | Lambda event source mapping · Polling · Batch size · Retry · Failure handling · Partial batch failure | ⏳ Pending |
+| 10 | **Kinesis + Lambda** | Lambda event source mapping · Polling · Batch size · Retry · Failure handling · Partial batch failure | 🔨 In progress |
 | 11 | **Retention and Replay** | Why Kinesis stores records temporarily · Retention period · Replay · Recovering after consumer failure | ✅ Completed |
 | 12 | **Scaling Modes** | Provisioned mode · On-demand mode · When to use each | ✅ Completed |
 | 13 | **Resharding** | Split shard · Merge shard · Scaling up · Scaling down | ✅ Completed |
@@ -97,7 +97,7 @@ Each concept links to its explanation, animation and questions in the [README](R
 - 4. **Partitioning**: how partition keys work and why the same key matters understood; good vs bad keys and hot shards still to do
 - 5. **Shards**: shard, capacity and parallelism understood; scaling shards is now covered by Resharding (topic 13), so this one can probably be ticked complete
 - 8. **Consumer Side**: consumer-side reading and consumer lag understood; GetRecords, shard iterator, polling and checkpointing still to do
-- 10. **Kinesis + Lambda**
+- 10. **Kinesis + Lambda**: test change
 - 15. **Error Handling**
 - 16. **Monitoring**
 - 17. **Security**

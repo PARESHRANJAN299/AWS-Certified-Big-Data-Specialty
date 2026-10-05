@@ -11,9 +11,9 @@ My study and architecture notes for **AWS Certified Big Data - Specialty**, orga
 <!-- progress:summary:start -->
 **Studying now:** [Amazon Kinesis Data Streams](chapter-01-collection/01-kinesis-data-streams/README.md)
 
-🟩🟩🟨🟨🟨🟩🟩🟨🟩⬜🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜
+🟩🟩🟨🟨🟨🟩🟩🟨🟩🟨🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜
 
-**9 of 20 topics complete · 4 in progress · 45%**
+**9 of 20 topics complete · 5 in progress · 45%**
 
 **Next up:** Hot shard and bad partition keys
 
@@ -69,7 +69,7 @@ Each topic folder follows the same pattern: a `README.md` with the explanation, 
 <!-- progress:topics:start -->
 | # | Topic | Status |
 | :-: | --- | --- |
-| 1 | [Amazon Kinesis Data Streams](chapter-01-collection/01-kinesis-data-streams/README.md) ([tracker](chapter-01-collection/01-kinesis-data-streams/TRACKER.md)) | 🔨 In progress: 9 of 20 topics complete, 4 in progress |
+| 1 | [Amazon Kinesis Data Streams](chapter-01-collection/01-kinesis-data-streams/README.md) ([tracker](chapter-01-collection/01-kinesis-data-streams/TRACKER.md)) | 🔨 In progress: 9 of 20 topics complete, 5 in progress |
 | 2 | Kinesis Data Firehose | ⏳ Planned |
 | 3 | Kinesis Agent | ⏳ Planned |
 | 4 | AWS IoT Core | ⏳ Planned |
