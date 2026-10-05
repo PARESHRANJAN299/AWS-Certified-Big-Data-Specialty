@@ -2,120 +2,30 @@
 
 > AWS Certified Big Data - Specialty · Chapter 1: Collection · Topic 1 · The roadmap for mastering Kinesis Data Streams, one concept at a time.
 
-🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜🟨⬜⬜⬜⬜⬜⬜⬜⬜⬜
+🟩🟩🟨🟨🟨🟩🟩🟨🟩⬜🟨🟨⬜🟩⬜⬜⬜⬜⬜⬜
 
 🟩 complete · 🟨 in progress · ⬜ pending
 
-**7 concepts understood · 1 of 20 roadmap topics complete · 1 in progress · 5%**
+**6 of 20 roadmap topics complete · 6 in progress · 30%**
 
-## Concepts understood so far
-
-Each concept below is marked complete once it is clearly understood. They feed the roadmap topics further down.
-
-### ✅ 1. Basic flow
-
-```text
-Producer -- PUT --> Kinesis <-- GET -- Consumer
-```
-
-- `PUT` = the Producer writes / sends data into Kinesis
-- `GET` = the Consumer reads data from Kinesis
-- Kinesis sits in the middle
-- The Consumer initiates the read
-
-### ✅ 2. Kinesis vs direct database write
-
-```text
-Application --> MongoDB
-```
-
-This is completely possible. Kinesis is not mandatory just because data arrives continuously.
-
-### ✅ 3. Transaction database vs event stream
-
-```text
-MongoDB = operational / current state
-Kinesis = event flow
-```
-
-Example:
-
-```text
-MongoDB:  current playback position = 32:15
-
-Kinesis:  PLAY
-          PAUSE
-          SEEK
-          BUFFER_START
-          BUFFER_END
-```
-
-### ✅ 4. Why not just use MongoDB?
-
-MongoDB can:
-
-- handle multiple readers
-- serve multiple systems
-- scale
-- store event data
-- support querying
-
-Kinesis becomes more attractive when:
-
-- event volume becomes very large
-- we want to reduce read/write pressure on the transactional database
-- we want a dedicated streaming layer
-- multiple systems need to process events continuously
-
-### ✅ 5. Independent processing
-
-Different readers can process the same stream at different speeds, and each moves on its own.
-
-```text
-Reader A -> event 1000
-Reader B -> event 850
-Reader C -> event 700
-```
-
-### ✅ 6. Retention
-
-Retention = how long Kinesis keeps the events available.
-
-```text
-after retention expires:  event -> no longer available in Kinesis
-```
-
-### ✅ 7. Replay
-
-Replay = reading retained events again. The movie analogy:
-
-```text
-Already watched to 15 min.
-
-Continue:  15 min -> onward
-Replay:     0 min -> onward again
-```
-
-- Replay is not a separate ON/OFF setting
-- Replay depends on the retained data still being available
-- Reading does not delete the event
+20 concepts understood and written up in the [Kinesis Data Streams README](README.md). Counting the in-progress topics, roughly 50 to 60 percent of the core fundamentals are covered.
 
 ## Roadmap progress
 
 - [x] 1. Basic Flow
-- [ ] 2. Core Terminology
-- [ ] 3. Record Structure
-- [ ] 4. Partitioning
-- [ ] 5. Shards
-- [ ] 6. Ordering
-- [ ] 7. Producer Side
-- [ ] 8. Consumer Side
-- [ ] 9. Consumer Types
+- [x] 2. Core Terminology
+- [ ] 3. Record Structure (in progress: record, partition key and sequence number understood; approximate arrival timestamp still to do)
+- [ ] 4. Partitioning (in progress: how partition keys work and why the same key matters understood; good vs bad keys and hot shards still to do)
+- [ ] 5. Shards (in progress: shard, capacity and parallelism understood; scaling shards (resharding) still to do)
+- [x] 6. Ordering
+- [x] 7. Producer Side
+- [ ] 8. Consumer Side (in progress: consumer-side reading and consumer lag understood; GetRecords, shard iterator, polling and checkpointing still to do)
+- [x] 9. Consumer Types
 - [ ] 10. Kinesis + Lambda
-- [ ] 11. Retention and Replay (in progress: retention and replay understood; the retention period setting and recovering after a consumer failure are still to do)
-- [ ] 12. Scaling Modes
+- [ ] 11. Retention and Replay (in progress: retention and replay understood; the retention period setting and recovering after a consumer failure still to do)
+- [ ] 12. Scaling Modes (in progress: provisioned vs on-demand understood; when to use each still to do)
 - [ ] 13. Resharding
-- [ ] 14. Throughput and Limits
+- [x] 14. Throughput and Limits
 - [ ] 15. Error Handling
 - [ ] 16. Monitoring
 - [ ] 17. Security
@@ -128,25 +38,94 @@ Replay:     0 min -> onward again
 | # | Topic | What you will master | Status |
 | :-: | --- | --- | :-: |
 | 1 | **Basic Flow** | What PUT means · What GET means · Who initiates PUT · Who initiates GET · Kinesis sits in the middle · Kinesis does not normally push directly to the consumer | ✅ Completed |
-| 2 | **Core Terminology** | Producer · Record · Stream · Shard · Partition Key · Sequence Number · Consumer (one term at a time) | ⏳ Pending |
-| 3 | **Record Structure** | What one Kinesis record contains: Data · Partition key · Sequence number · Approximate arrival timestamp | ⏳ Pending |
-| 4 | **Partitioning** | How partition keys work · How Kinesis chooses a shard · Why the same partition key matters · Good vs bad partition keys · Hot partition / hot shard | ⏳ Pending |
-| 5 | **Shards** | What a shard is · Why shards exist · Read capacity · Write capacity · Parallelism · Scaling shards | ⏳ Pending |
-| 6 | **Ordering** | Ordering inside one shard · Why ordering is not global · How the partition key affects ordering | ⏳ Pending |
-| 7 | **Producer Side** | PutRecord · PutRecords · Single vs batch writes · Producer retries · Producer failures | ⏳ Pending |
-| 8 | **Consumer Side** | GetRecords · Shard iterator · Polling · Checkpointing · Consumer lag | ⏳ Pending |
-| 9 | **Consumer Types** | Standard consumers vs enhanced fan-out consumers | ⏳ Pending |
+| 2 | **Core Terminology** | Producer · Record · Stream · Shard · Partition Key · Sequence Number · Consumer | ✅ Completed |
+| 3 | **Record Structure** | What one Kinesis record contains: Data · Partition key · Sequence number · Approximate arrival timestamp | 🔨 In progress |
+| 4 | **Partitioning** | How partition keys work · How Kinesis chooses a shard · Why the same partition key matters · Good vs bad partition keys · Hot partition / hot shard | 🔨 In progress |
+| 5 | **Shards** | What a shard is · Why shards exist · Read capacity · Write capacity · Parallelism · Scaling shards | 🔨 In progress |
+| 6 | **Ordering** | Ordering inside one shard · Why ordering is not global · How the partition key affects ordering | ✅ Completed |
+| 7 | **Producer Side** | PutRecord · PutRecords · Single vs batch writes · Producer retries · Producer failures | ✅ Completed |
+| 8 | **Consumer Side** | GetRecords · Shard iterator · Polling · Checkpointing · Consumer lag | 🔨 In progress |
+| 9 | **Consumer Types** | Standard consumers vs enhanced fan-out consumers | ✅ Completed |
 | 10 | **Kinesis + Lambda** | Lambda event source mapping · Polling · Batch size · Retry · Failure handling · Partial batch failure | ⏳ Pending |
 | 11 | **Retention and Replay** | Why Kinesis stores records temporarily · Retention period · Replay · Recovering after consumer failure | 🔨 In progress |
-| 12 | **Scaling Modes** | Provisioned mode · On-demand mode · When to use each | ⏳ Pending |
+| 12 | **Scaling Modes** | Provisioned mode · On-demand mode · When to use each | 🔨 In progress |
 | 13 | **Resharding** | Split shard · Merge shard · Scaling up · Scaling down | ⏳ Pending |
-| 14 | **Throughput and Limits** | Write throughput · Read throughput · Records per second · MB/s · What happens when limits are exceeded | ⏳ Pending |
+| 14 | **Throughput and Limits** | Write throughput · Read throughput · Records per second · MB/s · What happens when limits are exceeded | ✅ Completed |
 | 15 | **Error Handling** | ProvisionedThroughputExceededException · Retry · Backoff · Duplicate processing · Idempotency | ⏳ Pending |
 | 16 | **Monitoring** | CloudWatch metrics: IncomingRecords · IncomingBytes · GetRecords.IteratorAgeMilliseconds · ReadProvisionedThroughputExceeded · WriteProvisionedThroughputExceeded | ⏳ Pending |
 | 17 | **Security** | IAM permissions · Encryption · KMS · VPC endpoints · Least privilege | ⏳ Pending |
 | 18 | **Architecture Patterns** | Application events · Clickstream · Logs · Fraud detection · IoT · Real-time analytics · Security monitoring | ⏳ Pending |
 | 19 | **Service Comparisons** | Kinesis Data Streams vs Firehose · Kinesis vs SQS · Kinesis vs SNS · Kinesis vs Kafka / MSK | ⏳ Pending |
 | 20 | **Hands-on Build** | Python producer and consumer on a Kinesis data stream, then extended with Lambda, an analytics consumer and an S3 path | ⏳ Pending |
+
+## Concepts understood so far
+
+Each concept links to its explanation, animation and questions in the [README](README.md).
+
+| # | Concept | In one line | Written up in |
+| :-: | --- | --- | --- |
+| 1 | **Why Kinesis exists** | Not mandatory; databases like MongoDB can ingest directly; Kinesis helps with large continuous event flow, less database pressure, replay and independent processing | [README](README.md#4-do-you-always-need-kinesis) |
+| 2 | **PUT and GET** | Producer -- PUT --> Kinesis <-- GET -- Consumer | [README](README.md#2-basic-kinesis-flow) |
+| 3 | **Producer** | Application or service that sends records to Kinesis | [README](README.md#51-producer) |
+| 4 | **Record** | One individual event / data item | [README](README.md#52-record) |
+| 5 | **Stream** | The Kinesis resource that receives and holds records temporarily | [README](README.md#53-stream) |
+| 6 | **Shard** | One parallel lane inside a stream | [README](README.md#54-shard) |
+| 7 | **Partition key** | Routing value: you choose the key, Kinesis chooses the shard | [README](README.md#55-partition-key) |
+| 8 | **Sequence number** | Assigned by Kinesis inside a shard; position / order within that shard | [README](README.md#56-sequence-number) |
+| 9 | **Ordering** | Preserved within a shard, not globally across shards | [README](README.md#6-ordering) |
+| 10 | **Provisioned vs on-demand** | Provisioned: you manage shard capacity. On-demand: AWS manages scaling | [README](README.md#71-provisioned-or-on-demand) |
+| 11 | **Shard capacity** | Around 1 MB/s and 1,000 records/s writes; around 2 MB/s reads | [README](README.md#72-shard-capacity) |
+| 12 | **Throttling** | Writes above capacity can be rejected; the producer should retry | [README](README.md#73-throttling) |
+| 13 | **PutRecord** | Sends one record | [README](README.md#8-writing-data-putrecord-and-putrecords) |
+| 14 | **PutRecords** | Sends a batch of records; partial failures are possible | [README](README.md#8-writing-data-putrecord-and-putrecords) |
+| 15 | **Retention** | How long Kinesis keeps records available | [README](README.md#9-retention-and-replay) |
+| 16 | **Replay** | Re-reading retained events from an earlier point | [README](README.md#9-retention-and-replay) |
+| 17 | **Consumer-side reading** | A downstream system reads records from Kinesis | [README](README.md#101-consumer-side-reading) |
+| 18 | **Consumer lag** | How far behind a reader is from the newest events | [README](README.md#102-consumer-lag) |
+| 19 | **Standard consumer** | Readers share the shard's read capacity | [README](README.md#103-standard-consumers-and-enhanced-fan-out) |
+| 20 | **Enhanced fan-out** | Each registered consumer gets dedicated read capacity | [README](README.md#103-standard-consumers-and-enhanced-fan-out) |
+
+## Still pending
+
+- Hot shard and bad partition key (**next best topic**: it builds directly on shard capacity and partition keys)
+- Resharding, split shard and merge shard
+- Consumer checkpoints and the Kinesis Client Library (KCL)
+- Lambda with Kinesis
+- Retry and duplicate processing, and idempotency
+- CloudWatch monitoring
+- IAM and KMS security
+- Kinesis vs SQS, and Kinesis vs Firehose
+- Real production architecture
+- Hands-on implementation
+
+## Current flow you understand
+
+```text
+User Action
+    |
+    v
+Application / Producer
+    |
+    | PutRecord / PutRecords
+    v
+Kinesis Stream
+    |
+    +--> Shard 1
+    +--> Shard 2
+    +--> Shard 3
+           ^
+           |
+     Partition Key
+     decides routing
+
+Inside each shard:
+Record -> Sequence Number -> Ordering
+
+Consumers:
+Standard Consumer
+or
+Enhanced Fan-Out
+```
 
 ## Hands-on build target (topic 20)
 
@@ -181,6 +160,5 @@ Kinesis
 
 ## How this notebook is built
 
-- One concept at a time. A topic is marked complete only when its section is written and understood.
-- Core Terminology (topic 2) goes in this order: Producer → Record → Stream → Shard → Partition Key → Sequence Number → Consumer.
-- The [Kinesis Data Streams README](README.md) holds the written explanations with animated diagrams. Concepts 2 to 7 above are understood but not yet written up there.
+- One concept at a time. A topic is marked complete only when every point in its row is covered and understood; otherwise it stays in progress.
+- Each concept is written up in the [Kinesis Data Streams README](README.md) with an animated diagram, a "what you are seeing" walkthrough and questions to check yourself.

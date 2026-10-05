@@ -35,7 +35,7 @@ Each topic folder follows the same pattern: a `README.md` with the explanation, 
 
 | # | Topic | Status |
 | :-: | --- | --- |
-| 1 | [Amazon Kinesis Data Streams](chapter-01-collection/01-kinesis-data-streams/README.md) ([tracker](chapter-01-collection/01-kinesis-data-streams/TRACKER.md)) | 🔨 In progress: 1 of 20 topics complete, 7 concepts understood |
+| 1 | [Amazon Kinesis Data Streams](chapter-01-collection/01-kinesis-data-streams/README.md) ([tracker](chapter-01-collection/01-kinesis-data-streams/TRACKER.md)) | 🔨 In progress: 6 of 20 topics complete, 6 in progress |
 | 2 | Kinesis Data Firehose | ⏳ Planned |
 | 3 | Kinesis Agent | ⏳ Planned |
 | 4 | AWS IoT Core | ⏳ Planned |
