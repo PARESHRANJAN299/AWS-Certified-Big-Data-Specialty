@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" width="960" height="340" role="img" aria-labelledby="t d">
+  <title id="t">A customer logs in and the login event passes through Kinesis</title>
+  <desc id="d">The customer logs in to the application. The application PUTs a login event into Kinesis. Kinesis keeps the event. A consumer GETs the login event and processes it.</desc>
+  <defs><style>
+      .bg{fill:#0d1117} .node{fill:#161b22;stroke:#30363d;stroke-width:1.5} .big{fill:#161b22;stroke:#e9a23b;stroke-width:2}
+      .t{font:700 20px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .s{font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#8b949e}
+      .put{font:700 17px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#58a6ff} .get{font:700 17px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#e3b341} .ret{font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#3fb950}
+      .pk{font:700 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace} .cap{font:13px "Segoe UI",Helvetica,Arial,sans-serif;fill:#e6edf3} .tiny{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#7d8590}
+      .slot{fill:#0d1117;stroke:#30363d;stroke-width:1.5;stroke-dasharray:3 3}
+      .lane{fill:none;stroke-width:2.5}
+</style>
+    <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+    <marker id="ay" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e3b341"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+    <marker id="aw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b949e"/></marker>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect class="bg" width="960" height="340" rx="16"/>
+  <rect class="node" x="24" y="75" width="130" height="100" rx="14"/><text class="t" x="89.0" y="123.0" text-anchor="middle">Customer</text><text class="s" x="89.0" y="145.0" text-anchor="middle">logs in</text>
+  <rect class="node" x="214" y="75" width="166" height="100" rx="14"/><text class="t" x="297.0" y="123.0" text-anchor="middle">Application</text><text class="s" x="297.0" y="145.0" text-anchor="middle">the Producer</text>
+  <rect class="big" x="500" y="50" width="174" height="150" rx="14"/><text class="t" x="587.0" y="88" text-anchor="middle">Kinesis</text><text class="s" x="587.0" y="108" text-anchor="middle">Data Streams</text><text class="tiny" x="587.0" y="136" text-anchor="middle">event waits here</text>
+  <rect class="node" x="790" y="75" width="140" height="100" rx="14"/><text class="t" x="860.0" y="123.0" text-anchor="middle">Consumer</text><text class="s" x="860.0" y="145.0" text-anchor="middle">processes it</text>
+  <rect class="slot" x="568" y="150" width="38" height="26" rx="6"/>
+  <path class="lane" stroke="#8b949e" d="M154,125 H210" marker-end="url(#aw)"/>
+  <path class="lane" stroke="#58a6ff" d="M380,125 H496" marker-end="url(#ab)"/>
+  <text class="put" x="438" y="108" text-anchor="middle" style="font-size:14px">PUT</text>
+  <path class="lane" stroke="#e3b341" d="M790,100 H678" marker-end="url(#ay)"/>
+  <text class="get" x="734" y="84" text-anchor="middle" style="font-size:14px">GET</text>
+  <path d="M678,156 H790" fill="none" stroke="#3fb950" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ag)"/>
+  <text class="ret" x="734" y="180" text-anchor="middle" style="font-size:11px">event comes back</text>
+  <text class="tiny" x="438" y="148" text-anchor="middle">login event</text>
+  <g filter="url(#glow)">
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.0000;0.0375;0.0387;0.1250;0.1263;1.0000" dur="8.0s" repeatCount="indefinite"/><circle r="7" fill="#e6edf3"/><animateMotion dur="8.0s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.0375;0.1250;1" path="M154,125 H210"/></g>
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.0000;0.1750;0.1762;0.2750;0.2762;1.0000" dur="8.0s" repeatCount="indefinite"/><circle r="7" fill="#58a6ff"/><animateMotion dur="8.0s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.1750;0.2750;1" path="M380,125 H496"/></g>
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.0000;0.6000;0.6012;0.7000;0.7012;1.0000" dur="8.0s" repeatCount="indefinite"/><circle r="7" fill="#e3b341"/><text y="-10" text-anchor="middle" class="pk" style="fill:#e3b341">GET?</text><animateMotion dur="8.0s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.6000;0.7000;1" path="M790,100 H678"/></g>
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.0000;0.7250;0.7262;0.8500;0.8512;1.0000" dur="8.0s" repeatCount="indefinite"/><circle r="7" fill="#3fb950"/><animateMotion dur="8.0s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.7250;0.8500;1" path="M678,156 H790"/></g>
+  </g>
+  <rect x="568" y="150" width="38" height="26" rx="6" fill="#58a6ff" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.0000;0.2750;0.2938;0.7250;0.7438;1.0000" dur="8.0s" repeatCount="indefinite"/></rect>
+  <rect x="790" y="75" width="140" height="100" rx="14" fill="none" stroke="#3fb950" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.0000;0.8500;0.8750;0.9625;0.9875;1.0000" dur="8.0s" repeatCount="indefinite"/></rect>
+  <text class="cap" x="40" y="252" opacity=".3"><animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3" keyTimes="0.0000;0.0250;0.0563;0.1750;0.2062;1.0000" dur="8.0s" repeatCount="indefinite"/>1  A customer logs in to the application</text>
+  <text class="cap" x="40" y="276" opacity=".3"><animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3" keyTimes="0.0000;0.1625;0.1938;0.3250;0.3563;1.0000" dur="8.0s" repeatCount="indefinite"/>2  The application PUTs the login event into Kinesis</text>
+  <text class="cap" x="40" y="300" opacity=".3"><animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3" keyTimes="0.0000;0.3000;0.3312;0.6250;0.6562;1.0000" dur="8.0s" repeatCount="indefinite"/>3  Kinesis keeps the event until a Consumer processes it</text>
+  <text class="cap" x="40" y="324" opacity=".3"><animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3" keyTimes="0.0000;0.5875;0.6188;0.9625;0.9938;1.0000" dur="8.0s" repeatCount="indefinite"/>4  The Consumer GETs the login event and processes it</text>
+</svg>
